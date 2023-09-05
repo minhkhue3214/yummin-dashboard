@@ -2,12 +2,10 @@ import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
-import { useStateContext } from '../contexts/ContextProvider';
 import { cartData } from '../data/dummy';
 import { Button } from '.';
 
 const Cart = () => {
-  const { currentColor } = useStateContext();
 
   return (
     <div className="bg-half-transparent w-full fixed nav-item top-0 right-0 ">
@@ -56,7 +54,7 @@ const Cart = () => {
         <div className="mt-5">
           <Button
             color="white"
-            bgColor={currentColor}
+            bgColor="#03C9D7"
             text="Place Order"
             borderRadius="10px"
             width="full"

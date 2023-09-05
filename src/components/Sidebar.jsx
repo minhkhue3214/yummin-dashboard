@@ -5,14 +5,15 @@ import { MdOutlineCancel } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { links } from '../data/dummy';
-import { useStateContext } from '../contexts/ContextProvider';
+import { useUsersStore } from "../hooks/users";
 
 const Sidebar = () => {
-  const { currentColor, activeMenu, setActiveMenu, screenSize } = useStateContext();
+  const { usersState, dispatchUpdateActiveMenu } = useUsersStore();
+  // const { screenSize } = useStateContext();
 
   const handleCloseSideBar = () => {
-    if (activeMenu !== undefined && screenSize <= 900) {
-      setActiveMenu(false);
+    if (usersState.activeMenu !== undefined && 800 <= 900) {
+      dispatchUpdateActiveMenu(false);
     }
   };
 
@@ -21,17 +22,17 @@ const Sidebar = () => {
 
   return (
     <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
-      {activeMenu && (
+      {usersState.activeMenu && (
         <>
           <div className="flex justify-between items-center">
             <Link to="/" onClick={handleCloseSideBar} className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
-              <SiShopware /> <span>Shoppy</span>
+              <SiShopware /> <span>Yummin</span>
             </Link>
             <TooltipComponent content="Menu" position="BottomCenter">
               <button
                 type="button"
-                onClick={() => setActiveMenu(!activeMenu)}
-                style={{ color: currentColor }}
+                onClick={() => dispatchUpdateActiveMenu(!usersState.activeMenu)}
+                style={{ color: "#03C9D7" }}
                 className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
               >
                 <MdOutlineCancel />
@@ -50,7 +51,7 @@ const Sidebar = () => {
                     key={link.name}
                     onClick={handleCloseSideBar}
                     style={({ isActive }) => ({
-                      backgroundColor: isActive ? currentColor : '',
+                      backgroundColor: isActive ? "#03C9D7" : '',
                     })}
                     className={({ isActive }) => (isActive ? activeLink : normalLink)}
                   >
