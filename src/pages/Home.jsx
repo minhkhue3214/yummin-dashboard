@@ -1,10 +1,7 @@
 import React from "react";
 
-
-
-const Ecommerce = () => {
-
+const Home = () => {
   return <div className="mt-24"></div>;
 };
 
-export default Ecommerce;
+export default Home;

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import { Footer, Navbar, Sidebar, ThemeSettings } from './components';
-import { Customers, Ecommerce, Employees, Orders } from './pages';
+import { Customers, Home, Employees, Orders, Login } from './pages';
 
 import { useUsersStore } from "./hooks/users";
 
@@ -14,6 +14,7 @@ const App = () => {
   return (
     <div className="Dark">
       <BrowserRouter>
+
         <div className="flex relative dark:bg-main-dark-bg">
 
           {usersState.activeMenu ? (
@@ -40,8 +41,10 @@ const App = () => {
 
               <Routes>
                 {/* dashboard  */}
-                <Route path="/" element={(<Ecommerce />)} />
-                <Route path="/ecommerce" element={(<Ecommerce />)} />
+                <Route path="/" element={(<Home />)} />
+                <Route path="/home" element={(<Home />)} />
+                <Route path="/login" element={(<Login />)} />
+
 
                 {/* pages  */}
                 <Route path="/orders" element={<Orders />} />

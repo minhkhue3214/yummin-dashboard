@@ -1,33 +1,12 @@
 import React, { useState } from "react";
 
-import { ordersData, contextMenuItems, ordersGrid } from "../data/dummy";
-import { Header } from "../components";
+import { Button, Image, Pagination, Popconfirm, Tag } from "antd";
+import { AiFillEdit, AiOutlineUserAdd } from "react-icons/ai";
+import { InputSearch, Selector } from "../ui-component/atoms";
+import { AntdTable } from "../ui-component/molecules";
+import { MdDelete } from "react-icons/md";
 
-import {
-  StatusOnlineIcon,
-  StatusOfflineIcon,
-  SearchIcon,
-  PlusIcon,
-} from "@heroicons/react/outline";
-import {
-  Card,
-  Table,
-  TableHead,
-  TableRow,
-  TableHeaderCell,
-  TableBody,
-  TableCell,
-  Text,
-  Title,
-  Badge,
-  Flex,
-  TextInput,
-  Button,
-  Select,
-  SelectItem,
-} from "@tremor/react";
-
-const data = [
+const users = [
   {
     id: 1,
     email: "dominh321@gmail.com",
@@ -36,7 +15,8 @@ const data = [
     nickName: "khue19",
     roles: 1,
     typeLogin: "Phone",
-    avatar: null,
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "just a bio",
     isActive: true,
   },
@@ -48,7 +28,8 @@ const data = [
     nickName: "johndoe23",
     roles: 2,
     typeLogin: "Email",
-    avatar: "avatar2.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     isActive: false,
   },
@@ -60,7 +41,8 @@ const data = [
     nickName: "alice23",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar3.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "Hello, I'm Alice!",
     isActive: true,
   },
@@ -72,7 +54,8 @@ const data = [
     nickName: "testuser4",
     roles: 2,
     typeLogin: "Email",
-    avatar: "avatar4.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "This is a test user.",
     isActive: false,
   },
@@ -84,7 +67,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -96,7 +80,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -108,7 +93,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -120,7 +106,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -132,7 +119,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -144,7 +132,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -156,7 +145,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -168,7 +158,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -180,7 +171,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -192,7 +184,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -204,7 +197,8 @@ const data = [
     nickName: "user5",
     roles: 1,
     typeLogin: "Email",
-    avatar: "avatar5.jpg",
+    avatar:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     bio: "I'm user number 5.",
     isActive: true,
   },
@@ -214,86 +208,158 @@ const data = [
 
 const Orders = () => {
   const [value, setValue] = useState("");
+
+  const onSearch = (value) => {
+    // dispatchGetCategories({ params: { search: value } });
+  };
+
+  const columns = [
+    {
+      dataIndex: "avatar",
+      title: "Avatar",
+      render: (_, record) => (
+        <>
+          <Image
+            width={55}
+            style={{
+              cursor: "pointer",
+              width: "60px",
+              height: "60px",
+            }}
+            preview={{
+              mask: false,
+            }}
+            // src={record.avatar || avatarDefault}
+            src={record.avatar}
+          />
+        </>
+      ),
+      align: "center",
+      width: "7%",
+    },
+    { dataIndex: "email", title: "Email", width: "10%" },
+    { dataIndex: "phone", title: "Phone", width: "10%", align: "center" },
+    { dataIndex: "username", title: "Username", width: "8%" },
+    { dataIndex: "nickName", title: "Nick name", width: "8%" },
+    { dataIndex: "roles", title: "Role", width: "5%", align: "center" },
+    {
+      dataIndex: "typeLogin",
+      title: "Type login",
+      width: "5%",
+      align: "center",
+    },
+    {
+      dataIndex: "isActive",
+      title: "isActive",
+      render: (_, record) => (
+        // console.log("record",record)
+        <>
+          {record.isActive ? (
+            <Tag
+              color="blue"
+              style={{
+                width: "70px",
+                textAlign: "center",
+                borderRadius: "8px",
+              }}
+            >
+              Active
+            </Tag>
+          ) : (
+            <Tag
+              color="red"
+              style={{
+                width: "70px",
+                textAlign: "center",
+                borderRadius: "8px",
+              }}
+            >
+              Disabled
+            </Tag>
+          )}
+        </>
+      ),
+      width: "5%",
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      width: "10%",
+      align: "center",
+      render: (_, record) => (
+        <>
+          <Button
+            className="w-10 mr-5"
+            type="primary"
+            shape="circle"
+            icon={<AiFillEdit />}
+          ></Button>
+          <Popconfirm
+            title="Bạn có chắc chắn muốn xoá?"
+            okText="Đồng ý"
+            cancelText="Hủy"
+          >
+            <Button
+              className="w-10 bg-red-500"
+              // type="primary"
+              shape="circle"
+              icon={<MdDelete className="text-white" />}
+            ></Button>
+          </Popconfirm>
+        </>
+      ),
+    },
+  ];
+
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Users" />
-      <Card>
-        <Flex className="mb-4">
-          <Flex justifyContent="around" className="w-800">
-            <TextInput
-              className="w-4/5 mr-10"
-              icon={SearchIcon}
-              placeholder="Search..."
+      <div className="w-full h-full">
+        <div className="flex justify-between w-full mb-4">
+          <div className="flex justify-between w-800">
+            <InputSearch
+              // onSearch={onSearch}
+              placeholder="Searching"
+              style={{
+                width: "600px",
+              }}
+              size="middle"
             />
-            <Select className="w-1/5" value={value} onValueChange={setValue}>
-              <SelectItem value="1">Username</SelectItem>
-              <SelectItem value="2">Nickname</SelectItem>
-              <SelectItem value="3">Email</SelectItem>
-              <SelectItem value="4">Phone</SelectItem>
-            </Select>
-          </Flex>
+            <Selector
+              name="type"
+              mode=""
+              style={{
+                width: "100px",
+              }}
+              selectStyle={{
+                width: "100%",
+              }}
+              options={[
+                { key: "email", value: "email" },
+                { key: "username", value: "username" },
+                { key: "nickname", value: "nickname" },
+                { key: "phone", value: "phone" },
+              ]}
+            />
+          </div>
 
-          <Button icon={PlusIcon}>Add new product</Button>
-        </Flex>
-        <Title>List of Swiss Federal Councillours</Title>
-        <Table className="mt-5">
-          <TableHead>
-            <TableRow>
-              <TableHeaderCell>Email</TableHeaderCell>
-              <TableHeaderCell>Phone</TableHeaderCell>
-              <TableHeaderCell>Username</TableHeaderCell>
-              <TableHeaderCell>NickName</TableHeaderCell>
-              <TableHeaderCell>Roles</TableHeaderCell>
-              <TableHeaderCell>typeLogin</TableHeaderCell>
-              <TableHeaderCell>Bio</TableHeaderCell>
-              <TableHeaderCell>Active</TableHeaderCell>
-              <TableHeaderCell>Action</TableHeaderCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.email}</TableCell>
-                <TableCell>
-                  <Text>{item.phone}</Text>
-                </TableCell>
-                <TableCell>
-                  <Text>{item.username}</Text>
-                </TableCell>
-                <TableCell>
-                  <Text>{item.nickName}</Text>
-                </TableCell>
-                <TableCell>
-                  <Text>{item.roles}</Text>
-                </TableCell>
-                <TableCell>
-                  <Text>{item.typeLogin}</Text>
-                </TableCell>
-                <TableCell>
-                  <Text>{item.bio}</Text>
-                </TableCell>
-                <TableCell>
-                  {item.isActive ? (
-                    <Badge color="emerald" icon={StatusOnlineIcon}>
-                      Active
-                    </Badge>
-                  ) : (
-                    <Badge color="red" icon={StatusOfflineIcon}>
-                      Disabled
-                    </Badge>
-                  )}
-                </TableCell>
-                <TableCell>
-                  <Flex>
-                    <Button color="red">Delete</Button>
-                    <Button>Update</Button>
-                  </Flex>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Card>
+          <Button type="primary" icon={<AiOutlineUserAdd />}>
+            Add User
+          </Button>
+        </div>
+        {/* <div>List of Swiss Federal Councillours</div> */}
+        <div className="w-full h-full relative overflow-hidden flex flex-col">
+          {/* <DataTable columns={columns} rows={users} checkboxSelection={false} /> */}
+          <AntdTable
+            columns={columns}
+            dataSource={users}
+            checkboxSelection={false}
+          />
+        </div>
+
+        <div className="w-full h-fit-content flex flex-row justify-center items-center pt-16">
+          <Pagination page={1} total={50} />
+        </div>
+      </div>
     </div>
   );
 };
